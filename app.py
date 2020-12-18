@@ -12,7 +12,7 @@ model = joblib.load(open("model-v1.joblib","rb"))
 def data_preprocessor(df):
     """encodes the type feature to numerical values
     """
-    df.wine_type = df.type.map({'white':0, 'red':1})
+    df.type = df.type.map({'white':0, 'red':1})
     return df
 
 def visualize_confidence_level(prediction_proba):
@@ -60,7 +60,7 @@ def get_user_input():
     this function is used to get user input using sidebar slider and selectbox 
     return type : pandas dataframe
     """
-    wine_type = st.sidebar.selectbox("Select Wine type",("white", "red"))
+    types = st.sidebar.selectbox("Select Wine type",("white", "red"))
     fixed_acidity = st.sidebar.slider('fixed acidity', 3.8, 15.9, 7.0)
     volatile_acidity = st.sidebar.slider('volatile acidity', 0.08, 1.58, 0.4)
     citric_acid  = st.sidebar.slider('citric acid', 0.0, 1.66, 0.3)
@@ -73,7 +73,7 @@ def get_user_input():
     sulphates = st.sidebar.slider('sulphates', 0.22, 2.0, 1.0)
     alcohol = st.sidebar.slider('alcohol', 8.0, 14.9, 13.4)
     
-    features = {'wine_type': wine_type,
+    features = {'type': types,
             'fixed_acidity': fixed_acidity,
             'volatile_acidity': volatile_acidity,
             'citric_acid': citric_acid,
